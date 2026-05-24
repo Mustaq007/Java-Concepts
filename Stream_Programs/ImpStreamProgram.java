@@ -1,26 +1,25 @@
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class ImpStreamProgram {
 
 
     public static void main(String[] args) {
-     //   removeDuplicateAndSortInDescendingOrder();
-      //  findOddAndReturnSquares();
-        find2ndAnd3rdItem();
+       // removeDuplicateAndSortInDescendingOrder();
+       // findOddAndReturnSquares();
+      //  find2ndAnd3rdItem();
+        find2ndHighest();
 
     }
-
-
-
 
 
     //Q1. Remove duplicates & sort in descending order
     public static void removeDuplicateAndSortInDescendingOrder(){
         List<Integer> uniqueSortedList = Arrays.asList(1,2,2,1,19,21,15,19,14,11,30);
-        uniqueSortedList.stream().sorted(Comparator.reverseOrder()).forEach(System.out::println);
+        uniqueSortedList.stream().distinct().sorted(Comparator.reverseOrder()).forEach(System.out::println);
     }
 
     //Q2. From the List of Integers Find All the Odd numbers and Return their Squares
@@ -39,8 +38,9 @@ public class ImpStreamProgram {
     //Q3. We have a list Find the Second Highest Number from a list
     public static void find2ndHighest(){
         List<Integer> oddSquares = Arrays.asList(1,2,2,1,19,21,15,19,14,11,30);
-        List<Integer> desiredList = oddSquares.stream().skip(1).limit(2).collect(Collectors.toList());
-        System.out.println(desiredList);
+        Optional<Integer> secondHighest = oddSquares.stream().distinct().sorted(Comparator.reverseOrder()).skip(1).findFirst();
+        secondHighest.ifPresent(System.out::println);
+
     }
 
 
