@@ -1,6 +1,5 @@
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class ImpStreamProgram {
 
@@ -8,11 +7,19 @@ public class ImpStreamProgram {
         private int id;
         private String name;
         private Integer salary;
+        private String dept;
 
         public Employee(int id, String name, Integer salary) {
             this.id = id;
             this.name = name;
             this.salary = salary;
+        }
+
+        public Employee(int id, String name, Integer salary, String dept) {
+            this.id = id;
+            this.name = name;
+            this.salary = salary;
+            this.dept = dept;
         }
 
         public int getId() {
@@ -39,12 +46,66 @@ public class ImpStreamProgram {
             this.salary = salary;
         }
 
+        public String getDept() {
+            return dept;
+        }
+
+        public void setDept(String dept) {
+            this.dept = dept;
+        }
+
         @Override
         public String toString() {
             return "Employee{" +
                     "id=" + id +
                     ", name='" + name + '\'' +
                     ", salary=" + salary +
+                    ", dept='" + dept + '\'' +
+                    '}';
+        }
+    }
+
+    static class Expenses {
+        private int id;
+        private String category;
+        private Integer amount;
+
+        public Expenses(int id, String category, Integer amount) {
+            this.id = id;
+            this.category = category;
+            this.amount = amount;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getCategory() {
+            return category;
+        }
+
+        public void setCategory(String category) {
+            this.category = category;
+        }
+
+        public Integer getAmount() {
+            return amount;
+        }
+
+        public void setAmount(Integer amount) {
+            this.amount = amount;
+        }
+
+        @Override
+        public String toString() {
+            return "Expenses{" +
+                    "id=" + id +
+                    ", category='" + category + '\'' +
+                    ", amount=" + amount +
                     '}';
         }
     }
@@ -60,7 +121,8 @@ public class ImpStreamProgram {
         //returnFirst50KSalary();
       //  returnTopTwoHighestPaid();
        // sortEmployeeSaleryThenByNames();
-        findFrequencyOfEachElement();
+     //   findFrequencyOfEachElement();
+        findTotalTransaction();
 
     }
 
@@ -150,6 +212,40 @@ public class ImpStreamProgram {
         Map<Integer, Long> collect = inputList.stream().collect(Collectors.groupingBy(n -> n, Collectors.counting()));
         System.out.println(collect);
 
+    }
+
+    //Q11. From a list of Employees Group them according to department
+    public static void groupEmployeeByDept(){
+        List<Employee> inputList = Arrays.asList(new Employee(1,"Ravi",40000,"Devops"),
+                new Employee(2,"Vinesh",60000,"Engineering"),
+                new Employee(3,"Anuj",52000,"Engineering"),
+                new Employee(4,"Harsh",51000,"Product"),
+                new Employee(5,"Anand",51000,"HR"),
+                new Employee(6,"Sankar",88000,"Admin"),
+                new Employee(7,"Madhab",85000,"Admin"),
+                new Employee(8,"Abhishek",52000,"Engineering"));
+        Map<String, Long> collect = inputList.stream().collect(Collectors.groupingBy(n -> n.getDept(), Collectors.counting()));
+        System.out.println(collect);
+    }
+
+    //Q12. Find the total transaction amount from each category
+    public static void findTotalTransaction(){
+        List<Expenses> inputList = Arrays.asList(
+                new Expenses(1, "Food", 200),
+                new Expenses(2, "Travel", 1200),
+                new Expenses(3, "Utilities", 800),
+                new Expenses(4, "Food", 450),
+                new Expenses(5, "Shopping", 1500),
+                new Expenses(6, "Travel", 600),
+                new Expenses(7, "Health", 900),
+                new Expenses(8, "Utilities", 300),
+                new Expenses(9, "Food", 350)
+        );
+
+        Map<String, Integer> totalByCategory = inputList.stream()
+                .collect(Collectors.groupingBy(Expenses::getCategory, Collectors.summingInt(Expenses::getAmount)));
+
+        System.out.println(totalByCategory);
     }
 
 
