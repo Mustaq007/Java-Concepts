@@ -41,7 +41,11 @@ public class ImpStreamProgram {
 
         @Override
         public String toString() {
-            return "Employee{id=" + id + ", name='" + name + "'}";
+            return "Employee{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    ", salary=" + salary +
+                    '}';
         }
     }
 
@@ -54,7 +58,9 @@ public class ImpStreamProgram {
         //divideEvenAndOdd();
       //  returnLongestString();
         //returnFirst50KSalary();
-        returnTopTwoHighestPaid();
+      //  returnTopTwoHighestPaid();
+       // sortEmployeeSaleryThenByNames();
+        findFrequencyOfEachElement();
 
     }
 
@@ -125,22 +131,26 @@ public class ImpStreamProgram {
     }
 
 
-    //Q7. From a list of Employees Sort it According to Salary Then Sort it According to names
-//    public static void returnTopTwoHighestPaid(){
-//        List<Employee> inputList = Arrays.asList(new Employee(1,"Ravi",40000),
-//                new Employee(2,"Vinesh",60000),
-//                new Employee(3,"Anuj",52000),
-//                new Employee(4,"Harsh",51000),
-//                new Employee(4,"Sankar",88000),
-//                new Employee(5,"Madhab",85000));
-//        inputList.stream().sorted(Comparator.comparing(Employee::getSalary).reversed()).limit(2).forEach(System.out::println);
-//    }
+    //Q9. From a list of Employees Sort it According to Salary Then Sort it According to names
+    public static void sortEmployeeSaleryThenByNames(){
+        List<Employee> inputList = Arrays.asList(new Employee(1,"Ravi",40000),
+                new Employee(2,"Vinesh",60000),
+                new Employee(3,"Anuj",52000),
+                new Employee(4,"Harsh",51000),
+                new Employee(5,"Anand",51000),
+                new Employee(6,"Sankar",88000),
+                new Employee(7,"Madhab",85000),
+                new Employee(8,"Abhishek",52000));
+        inputList.stream().sorted(Comparator.comparing(Employee::getSalary).thenComparing(Employee::getName)).forEach(System.out::println);
+    }
 
+    //Q10. We have a list Find the Frequncy of each Element in a list
+    public static void findFrequencyOfEachElement(){
+        List<Integer> inputList = Arrays.asList(1,2,2,1,19,21,15,19,14,11,30);
+        Map<Integer, Long> collect = inputList.stream().collect(Collectors.groupingBy(n -> n, Collectors.counting()));
+        System.out.println(collect);
 
-
-
-
-
+    }
 
 
 
