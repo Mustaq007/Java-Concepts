@@ -260,9 +260,26 @@ public class ImpStreamProgram {
                 new Employee(6,"Sankar",88000,"Admin"),
                 new Employee(7,"Madhab",85000,"Admin"),
                 new Employee(8,"Abhishek",52000,"Engineering"));
-                Map<String, Double> collect = inputList.stream().collect(Collectors.groupingBy(Employee::getDept, Collectors.averagingInt(Employee::getSalary)));
-                System.out.println(collect);
+        Map<String, Double> collect = inputList.stream().collect(Collectors.groupingBy(Employee::getDept, Collectors.averagingInt(Employee::getSalary)));
+        System.out.println(collect);
     }
+
+
+    //Q14. Given List of employees find Higest salary from each department
+    public static void findHighestSalaryFromEachDept(){
+        List<Employee> inputList = Arrays.asList(new Employee(1,"Ravi",40000,"Devops"),
+                new Employee(2,"Vinesh",60000,"Engineering"),
+                new Employee(3,"Anuj",52000,"Engineering"),
+                new Employee(4,"Harsh",51000,"Product"),
+                new Employee(5,"Anand",51000,"HR"),
+                new Employee(6,"Sankar",88000,"Admin"),
+                new Employee(7,"Madhab",85000,"Admin"),
+                new Employee(8,"Abhishek",52000,"Engineering"));
+        //inputList.stream().collect(Collectors.groupingBy(Employee::getDept, Collectors.maxBy(Employee::getSalary)));
+
+    }
+
+
 
 
 
