@@ -122,7 +122,8 @@ public class ImpStreamProgram {
       //  returnTopTwoHighestPaid();
        // sortEmployeeSaleryThenByNames();
      //   findFrequencyOfEachElement();
-        findTotalTransaction();
+      //  findTotalTransaction();
+        findAverageSalaryFromEachDept();
 
     }
 
@@ -194,7 +195,7 @@ public class ImpStreamProgram {
 
 
     //Q9. From a list of Employees Sort it According to Salary Then Sort it According to names
-    public static void sortEmployeeSaleryThenByNames(){
+    public static void sortEmployeeSalaryThenByNames(){
         List<Employee> inputList = Arrays.asList(new Employee(1,"Ravi",40000),
                 new Employee(2,"Vinesh",60000),
                 new Employee(3,"Anuj",52000),
@@ -246,6 +247,21 @@ public class ImpStreamProgram {
                 .collect(Collectors.groupingBy(Expenses::getCategory, Collectors.summingInt(Expenses::getAmount)));
 
         System.out.println(totalByCategory);
+    }
+
+
+    //Q13. Given List of employees find average salary from each department
+    public static void findAverageSalaryFromEachDept(){
+        List<Employee> inputList = Arrays.asList(new Employee(1,"Ravi",40000,"Devops"),
+                new Employee(2,"Vinesh",60000,"Engineering"),
+                new Employee(3,"Anuj",52000,"Engineering"),
+                new Employee(4,"Harsh",51000,"Product"),
+                new Employee(5,"Anand",51000,"HR"),
+                new Employee(6,"Sankar",88000,"Admin"),
+                new Employee(7,"Madhab",85000,"Admin"),
+                new Employee(8,"Abhishek",52000,"Engineering"));
+                Map<String, Double> collect = inputList.stream().collect(Collectors.groupingBy(Employee::getDept, Collectors.averagingInt(Employee::getSalary)));
+                System.out.println(collect);
     }
 
 
