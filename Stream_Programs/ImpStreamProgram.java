@@ -128,8 +128,9 @@ public class ImpStreamProgram {
      //   findHighestSalaryFromEachDept();
        // groupEmployeeAccordingToDept();
        // convertEmployeeListIntoCommaSeparatedNames();
-
-        findCommonBetweenTwoList();
+        //findCommonBetweenTwoList();
+       // convertListOfListIntoSingleList();
+        printEmployees();
 
     }
 
@@ -316,10 +317,46 @@ public class ImpStreamProgram {
         System.out.println(collect);
     }
 
+    //Q17. Given List of employees Convert the list into comma-separated string of Employee names.
     public static void findCommonBetweenTwoList(){
+
+        //below program will use time complexity of o(n)
+//        List<Integer> list1 = Arrays.asList(1,2,3,4,5);
+//        List<Integer> list2 = Arrays.asList(4,5,6,7,8);
+//        list2.stream().filter(n-> list1.contains(n)).forEach(System.out::println);
+
+        //below is the optimized version of it for time complexity O(1)
         List<Integer> list1 = Arrays.asList(1,2,3,4,5);
         List<Integer> list2 = Arrays.asList(4,5,6,7,8);
-        list2.stream().filter(n-> list1.contains(n)).forEach(System.out::println);
+        Set<Integer> list1Set = new HashSet<>(list1);
+
+        list2.stream().filter(n-> list1Set.contains(n)).forEach(System.out::println);
+
+    }
+
+
+    //Q18. you have a list of list convert it into a single list with all the elements. Remove Duplicate if any
+    public static void convertListOfListIntoSingleList(){
+        List<List<Integer>> list = Arrays.asList(
+                Arrays.asList(1, 2, 3, 4, 6),
+                Arrays.asList(7, 8, 9, 10, 11),
+                Arrays.asList(12, 13, 14, 15, 16)
+        );
+
+        list.stream().flatMap(n->n.stream().distinct()).forEach(System.out::println);
+    }
+
+    //Q19. Given List of employees Print them very fast (The Order doesnot matter)
+    public static void printEmployees(){
+        List<Employee> inputList = Arrays.asList(new Employee(1,"Ravi",40000,"Devops"),
+                new Employee(2,"Vinesh",60000,"Engineering"),
+                new Employee(3,"Anuj",52000,"Engineering"),
+                new Employee(4,"Harsh",51000,"Product"),
+                new Employee(5,"Anand",51000,"HR"),
+                new Employee(6,"Sankar",88000,"Admin"),
+                new Employee(7,"Madhab",85000,"Admin"),
+                new Employee(8,"Abhishek",52000,"Engineering"));
+        inputList.parallelStream().map(Employee::getName).forEach(System.out::println);
     }
 
 
