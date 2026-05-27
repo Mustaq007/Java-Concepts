@@ -342,7 +342,6 @@ public class ImpStreamProgram {
                 Arrays.asList(7, 8, 9, 10, 11),
                 Arrays.asList(12, 13, 14, 15, 16)
         );
-
         list.stream().flatMap(n->n.stream().distinct()).forEach(System.out::println);
     }
 
@@ -358,9 +357,5 @@ public class ImpStreamProgram {
                 new Employee(8,"Abhishek",52000,"Engineering"));
         inputList.parallelStream().map(Employee::getName).forEach(System.out::println);
     }
-
-
-
-
 
 }
