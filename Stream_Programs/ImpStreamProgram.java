@@ -1,5 +1,6 @@
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ImpStreamProgram {
 
@@ -123,7 +124,12 @@ public class ImpStreamProgram {
        // sortEmployeeSaleryThenByNames();
      //   findFrequencyOfEachElement();
       //  findTotalTransaction();
-        findAverageSalaryFromEachDept();
+      //  findAverageSalaryFromEachDept();
+     //   findHighestSalaryFromEachDept();
+       // groupEmployeeAccordingToDept();
+       // convertEmployeeListIntoCommaSeparatedNames();
+
+        findCommonBetweenTwoList();
 
     }
 
@@ -275,8 +281,45 @@ public class ImpStreamProgram {
                 new Employee(6,"Sankar",88000,"Admin"),
                 new Employee(7,"Madhab",85000,"Admin"),
                 new Employee(8,"Abhishek",52000,"Engineering"));
-        //inputList.stream().collect(Collectors.groupingBy(Employee::getDept, Collectors.maxBy(Employee::getSalary)));
+        Map<String, Optional<Employee>> result = inputList.stream().collect(Collectors.groupingBy(Employee::getDept, Collectors.maxBy(Comparator.comparingInt(Employee::getSalary))));
+        System.out.println(result);
+    }
 
+
+    //Q15. Given List of employees Group Them According to Department
+    public static void groupEmployeeAccordingToDept(){
+        List<Employee> inputList = Arrays.asList(new Employee(1,"Ravi",40000,"Devops"),
+                new Employee(2,"Vinesh",60000,"Engineering"),
+                new Employee(3,"Anuj",52000,"Engineering"),
+                new Employee(4,"Harsh",51000,"Product"),
+                new Employee(5,"Anand",51000,"HR"),
+                new Employee(6,"Sankar",88000,"Admin"),
+                new Employee(7,"Madhab",85000,"Admin"),
+                new Employee(8,"Abhishek",52000,"Engineering"));
+
+        Map<String, List<Employee>> collect = inputList.stream().collect(Collectors.groupingBy(Employee::getDept));
+        System.out.println(collect);
+    }
+
+    //Q16. Given List of employees Convert the list into comma-separated string of Employee names.
+    public static void convertEmployeeListIntoCommaSeparatedNames(){
+        List<Employee> inputList = Arrays.asList(new Employee(1,"Ravi",40000,"Devops"),
+                new Employee(2,"Vinesh",60000,"Engineering"),
+                new Employee(3,"Anuj",52000,"Engineering"),
+                new Employee(4,"Harsh",51000,"Product"),
+                new Employee(5,"Anand",51000,"HR"),
+                new Employee(6,"Sankar",88000,"Admin"),
+                new Employee(7,"Madhab",85000,"Admin"),
+                new Employee(8,"Abhishek",52000,"Engineering"));
+
+        String collect = inputList.stream().map(Employee::getName).collect(Collectors.joining(","));
+        System.out.println(collect);
+    }
+
+    public static void findCommonBetweenTwoList(){
+        List<Integer> list1 = Arrays.asList(1,2,3,4,5);
+        List<Integer> list2 = Arrays.asList(4,5,6,7,8);
+        list2.stream().filter(n-> list1.contains(n)).forEach(System.out::println);
     }
 
 
