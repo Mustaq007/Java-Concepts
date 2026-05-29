@@ -1,5 +1,6 @@
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class ImpStreamProgram {
@@ -130,7 +131,9 @@ public class ImpStreamProgram {
        // convertEmployeeListIntoCommaSeparatedNames();
         //findCommonBetweenTwoList();
        // convertListOfListIntoSingleList();
-        printEmployees();
+      //  printEmployees();
+        //checkIfCorrectorNot();
+        findCombinedSalaryFromAllDept();
 
     }
 
@@ -356,6 +359,29 @@ public class ImpStreamProgram {
                 new Employee(7,"Madhab",85000,"Admin"),
                 new Employee(8,"Abhishek",52000,"Engineering"));
         inputList.parallelStream().map(Employee::getName).forEach(System.out::println);
+    }
+
+    //Q20 Check if the method is correct or not?
+       public static void checkIfCorrectorNot(){
+        List<Integer> inputList = new ArrayList<>();
+           IntStream.range(1,1000)
+                   .parallel()
+                   .forEach(elem->inputList.add(elem));
+       }
+
+
+    //Q14. Given List of employees find Combined salary from all department
+    public static void findCombinedSalaryFromAllDept(){
+        List<Employee> inputList = Arrays.asList(new Employee(1,"Ravi",40000,"Devops"),
+                new Employee(2,"Vinesh",60000,"Engineering"),
+                new Employee(3,"Anuj",52000,"Engineering"),
+                new Employee(4,"Harsh",51000,"Product"),
+                new Employee(5,"Anand",51000,"HR"),
+                new Employee(6,"Sankar",88000,"Admin"),
+                new Employee(7,"Madhab",85000,"Admin"),
+                new Employee(8,"Abhishek",52000,"Engineering"));
+        Integer reduce = inputList.parallelStream().map(Employee::getSalary).reduce(0, (a, b) -> a + b);
+        System.out.println(reduce);
     }
 
 }
