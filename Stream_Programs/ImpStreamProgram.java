@@ -370,7 +370,7 @@ public class ImpStreamProgram {
        }
 
 
-    //Q14. Given List of employees find Combined salary from all department
+    //Q21. Given List of employees find Combined salary from all department
     public static void findCombinedSalaryFromAllDept(){
         List<Employee> inputList = Arrays.asList(new Employee(1,"Ravi",40000,"Devops"),
                 new Employee(2,"Vinesh",60000,"Engineering"),
@@ -383,11 +383,5 @@ public class ImpStreamProgram {
         Integer reduce = inputList.parallelStream().map(Employee::getSalary).reduce(0, (a, b) -> a + b);
         System.out.println(reduce);
     }
-
-
-
-
-
-
 
 }
